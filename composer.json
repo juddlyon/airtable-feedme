@@ -1,0 +1,61 @@
+{
+    "name": "juddlyon/airtable-feedme",
+    "description": "Airtable data type with automatic pagination support for Feed Me",
+    "type": "craft-plugin",
+    "version": "0.1.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "airtable",
+        "feed-me"
+    ],
+    "support": {
+        "email": "jl@juddlyon.com",
+        "docs": "https://github.com/juddlyon/airtable-feedme/blob/main/README.md",
+        "issues": "https://github.com/juddlyon/airtable-feedme/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Judd Lyon",
+            "email": "jl@juddlyon.com",
+            "homepage": "https://juddlyon.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "craftcms/cms": "^5.0.0",
+        "craftcms/feed-me": "^6.0.0"
+    },
+    "require-dev": {
+        "craftcms/ecs": "dev-main",
+        "craftcms/phpstan": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "juddlyon\\airtablefeedme\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Airtable Feed Me",
+        "handle": "airtable-feedme",
+        "developer": "Judd Lyon",
+        "developerUrl": "https://juddlyon.com",
+        "developerEmail": "jl@juddlyon.com",
+        "documentationUrl": "https://github.com/juddlyon/airtable-feedme/blob/main/README.md",
+        "changelogUrl": "https://github.com/juddlyon/airtable-feedme/blob/main/CHANGELOG.md",
+        "class": "juddlyon\\airtablefeedme\\AirtableFeedMe"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.0.2"
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
+    }
+}

@@ -1,0 +1,31 @@
+{% import "_includes/forms" as forms %}
+
+<div class="readable">
+  <blockquote class="note">
+    <p><strong>{{ 'API Key Required'|t('airtable-feedme') }}</strong></p>
+    <p>{{ 'Set your Airtable API key using the'|t('airtable-feedme') }} <code>AIRTABLE_API_KEY</code> {{ 'environment variable in your .env file.'|t('airtable-feedme') }}</p>
+  </blockquote>
+</div>
+
+<hr>
+
+<div class="readable">
+  <h2>{{ 'How to use'|t('airtable-feedme') }}</h2>
+  <ol>
+    <li>{{ 'Get your Airtable API key from'|t('airtable-feedme') }} <a href="https://airtable.com/create/tokens" target="_blank" rel="noopener">{{ 'Airtable account settings'|t('airtable-feedme') }}</a></li>
+    <li>{{ 'In Feed Me, create a new feed and select "Airtable" as the Feed Type'|t('airtable-feedme') }}</li>
+    <li>{{ 'Use your Airtable API URL (e.g., https://api.airtable.com/v0/appXXXXXX/TableName)'|t('airtable-feedme') }}</li>
+    <li>{{ 'The plugin will automatically handle pagination for tables with more than 100 records'|t('airtable-feedme') }}</li>
+  </ol>
+
+  <h3>{{ 'API URL Format'|t('airtable-feedme') }}</h3>
+  <p><code>https://api.airtable.com/v0/{baseId}/{tableIdOrName}</code></p>
+  
+  <h3>{{ 'Optional Query Parameters'|t('airtable-feedme') }}</h3>
+  <ul>
+    <li><code>view</code> - {{ 'The name or ID of a view in the table'|t('airtable-feedme') }}</li>
+    <li><code>maxRecords</code> - {{ 'The maximum total number of records to return'|t('airtable-feedme') }}</li>
+    <li><code>sort</code> - {{ 'Sort records by field'|t('airtable-feedme') }}</li>
+    <li><code>filterByFormula</code> - {{ 'Airtable formula to filter records'|t('airtable-feedme') }}</li>
+  </ul>
+</div>
