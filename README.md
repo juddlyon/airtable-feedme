@@ -2,11 +2,23 @@
 
 A Feed Me feed type that handles Airtable's 100-record API limit with automatic pagination.
 
-## Problem This Solves
+## Why This Plugin Exists
 
-Airtable's API limits responses to 100 records per page, requiring manual pagination to access larger datasets. When using Feed Me's built-in JSON feed type with Airtable, you'll only get the first 100 records - missing the rest of your data.
+While Feed Me has built-in pagination support, it doesn't work with Airtable's API. Here's why:
 
-This plugin solves that limitation by automatically handling pagination behind the scenes, fetching all records from your Airtable base regardless of size.
+**The Problem:**
+- Airtable's API returns a maximum of 100 records per request
+- To get more records, you must use an `offset` parameter provided in the response
+- Feed Me's standard pagination expects numbered pages (page 1, 2, 3...) or standard limit/offset parameters
+- Airtable uses a unique cursor-based pagination with opaque offset strings
+- Result: Feed Me can only fetch the first 100 records from Airtable, ignoring the rest
+
+**The Solution:**
+This plugin implements a custom Airtable data type for Feed Me that:
+- Automatically detects when Airtable returns an `offset` parameter
+- Recursively fetches additional pages using Airtable's offset cursors
+- Combines all pages into a single dataset for Feed Me to process
+- Works transparently - just set it up like any other Feed Me feed
 
 ## Features
 
@@ -83,6 +95,20 @@ Example:
 ```
 https://api.airtable.com/v0/appXXXXXX/Videos?view=Published&maxRecords=500&sort[0][field]=Date&sort[0][direction]=desc
 ```
+
+## Technical Details
+
+For developers interested in how this works:
+
+1. The plugin registers a new "Airtable" data type with Feed Me
+2. When Feed Me requests data, our data type:
+   - Makes the initial API request with authentication headers
+   - Checks if the response contains an `offset` parameter
+   - If offset exists, makes additional requests until all records are fetched
+   - Merges all record arrays into a single response
+3. Feed Me processes the complete dataset as if it came from a single request
+
+The key incompatibility was that Airtable uses cursor-based pagination with opaque strings (like `itrXXXXXXXXXXXXX/recXXXXXXXXXXXXX`) rather than numeric offsets, which Feed Me's pagination system couldn't handle.
 
 ## Support
 
