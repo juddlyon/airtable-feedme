@@ -1,13 +1,19 @@
 # Airtable Feed Me Plugin for Craft CMS
 
-Airtable data type with automatic pagination support for Feed Me.
+A Feed Me feed type that handles Airtable's 100-record API limit with automatic pagination.
+
+## Problem This Solves
+
+Airtable's API limits responses to 100 records per page, requiring manual pagination to access larger datasets. When using Feed Me's built-in JSON feed type with Airtable, you'll only get the first 100 records - missing the rest of your data.
+
+This plugin solves that limitation by automatically handling pagination behind the scenes, fetching all records from your Airtable base regardless of size.
 
 ## Features
 
-- **Automatic Pagination** - Handles Airtable's 100-record limit seamlessly
-- **Easy Configuration** - Set API key via Control Panel or environment variables
-- **Full Airtable API Support** - Use views, filters, and sorting
-- **Craft CMS 5 Compatible** - Built for the latest version of Craft
+- **Automatic Pagination** - Transparently fetches all records beyond Airtable's 100-record API limit
+- **Easy Configuration** - Set API key via environment variables for security
+- **Full Airtable API Support** - Use views, filters, and sorting just like the native API
+- **Craft CMS 5 Compatible** - Built for the latest version of Craft and Feed Me
 
 ## Requirements
 
@@ -46,10 +52,13 @@ composer require juddlyon/airtable-feedme
 
 ### API Key
 
-You can set your Airtable API key in two ways:
+Set your Airtable API key via environment variable for security:
 
-1. **Control Panel**: Go to Settings → Airtable Feed Me and enter your API key
-2. **Environment Variable**: Set `AIRTABLE_API_KEY` in your `.env` file
+```bash
+AIRTABLE_API_KEY="your_api_key_here"
+```
+
+Add this to your `.env` file. The plugin enforces environment variable usage to prevent accidentally committing API keys.
 
 ### Creating a Feed
 

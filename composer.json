@@ -1,6 +1,6 @@
 {
     "name": "juddlyon/airtable-feedme",
-    "description": "Airtable data type with automatic pagination support for Feed Me",
+    "description": "A Feed Me feed type that handles Airtable's 100-record API limit with automatic pagination",
     "type": "craft-plugin",
     "version": "0.1.0",
     "keywords": [
