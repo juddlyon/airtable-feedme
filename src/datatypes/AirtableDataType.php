@@ -112,7 +112,25 @@ class AirtableDataType extends DataType implements DataTypeInterface
         // Return all records in the expected format
         $finalData = ['records' => $allRecords];
         
-        // Convert back to JSON for Feed Me to process
-        return ['success' => true, 'data' => JsonHelper::encode($finalData)];
+        // For primary element detection, return raw array data
+        // For actual feed processing, let Feed Me handle the data format
+        if (!$usePrimaryElement) {
+            // Return raw data so Feed Me can analyze structure for dropdown
+            return ['success' => true, 'data' => $finalData];
+        }
+        
+        // Look for and return only the items for primary element
+        $primaryElement = Hash::get($settings, 'primaryElement');
+        
+        if ($primaryElement && $usePrimaryElement) {
+            $array = FeedMe::$plugin->data->findPrimaryElement($primaryElement, $finalData);
+        } else {
+            $array = $finalData;
+        }
+        
+        $this->feedData = $array;
+        
+        // Return processed data
+        return ['success' => true, 'data' => $array];
     }
 }
